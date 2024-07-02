@@ -6,7 +6,7 @@ DATA_DIR = './fm/'
 =====
 ./fm/表【FM】ホルダー用.csv
 ./fm/表【FM】特別枠.csv
-...
+
 
 input
 =====
@@ -60,7 +60,7 @@ for filename in os.listdir(DATA_DIR):
         filepath = os.path.join(DATA_DIR, filename)
         with open(filepath, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
-            for _ in range(2):  # Skip the first two rows
+            for _ in range(1):  # Skip the first two rows
                 try:
                     next(reader)
                 except StopIteration:
@@ -75,11 +75,11 @@ for filename in os.listdir(DATA_DIR):
                 result[address]['maxClaimable'] += int(row[0])
 
 # Write the result to a JSON file
-with open('./fm/fm_result/result.json', 'w', encoding='utf-8') as f:
+with open('./fm/fm_result/fm_result.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
 
 # Create csv for check total count by weight
-with open('./fm/fm_result/result.csv', 'w', encoding='utf-8') as f:
+with open('./fm/fm_result/fm_result.csv', 'w', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow(['address', 'maxClaimable'])
     for address, data in result.items():
